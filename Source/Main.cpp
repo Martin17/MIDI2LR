@@ -86,6 +86,9 @@ public:
 		m_commandMap.toXMLDocument(defaultProfile);
 		m_lr_IPC_OUT.shutdown();
 		m_lr_IPC_IN.shutdown();
+#ifndef _WIN32
+        nanosleep(100000000); // kill OS X crash by allowing message queues to empty
+#endif
 		mainWindow = nullptr; // (deletes our window)
 		quit();
 	}
